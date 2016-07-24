@@ -1,0 +1,17 @@
+%% Generate data
+
+x = 20 + wgn(1000, 1, 4); %% GLM with mean 20, n = 1000, power = 4
+addpath('../lib/');
+n_Lambda = 10;
+n_k = 10;
+Lambda = linspace(0,20,n_Lambda);
+k = 2:1:n_k
+T_temp = zeros()
+T = zeros(n_Lambda,n_k-1);
+for i = 1:1:n_Lambda
+    for j = 1:1:n_k-1
+        
+        T(i,j) = sample_and_aggregate(x, 0.1, Lambda(i), @mean, k(j)); %% choose epsilon = 0.1, Lambda = 5, estimator = sample mean
+    end
+end
+
